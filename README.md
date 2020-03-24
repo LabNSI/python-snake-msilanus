@@ -1,3 +1,4 @@
+[![Run on Repl.it](https://repl.it/badge/github/LabNSI/python-snake-msilanus)](https://repl.it/github/LabNSI/python-snake-msilanus)
 # python-snake
 Python version of snake old game
 
