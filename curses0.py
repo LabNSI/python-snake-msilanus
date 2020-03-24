@@ -85,15 +85,18 @@ def jeu(win):
 
 	# Emission d'un beep  au début du jeu
 	curses.beep()
-  end = False
+	end = False
+    
+    
 
-  # Tant que le joueur n'a pas quitter le jeu
+    # Tant que le joueur n'a pas quitter le jeu
 	while key != 27 and not end:
 
 		key = controle(win, key)
+		end = perdu(win, snake)
 		snake, score = deplacement(win, score, key, snake, food)
 
-  return score
+	return score
 
 def mange_pomme(win, food, snake, score):
 	'''
@@ -208,7 +211,7 @@ def deplacement(win, score, key, snake, food):
 	win.addstr(0, 2, 'Score : ' + str(score) + ' ')
 
 	# Attendre avant le pas suivant
-	vitesse = 1
+	vitesse = plus_vite(score)
 	win.timeout(150//vitesse)
 
 	# tuple contenant :
@@ -246,6 +249,24 @@ def perdu(win, snake):
 		curses.napms(2000)
 		end = True
 	return end
+
+def plus_vite(score):
+	'''
+	Calcul de la vitesse du serpent
+	paramètre :
+	  score : score en cours
+	retourne :
+	  vitesse du serpent entre 1 et 10
+	'''
+
+	# vitesse est le quotient de la division entière de score par 5 ( + 1)
+	vitesse = score // 5 + 1
+
+	# Si vitesse est superieur à 10, alors vitesse = 10
+	if vitesse > 10:
+		vitesse = 10
+
+	return vitesse
 
 
 
